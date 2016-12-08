@@ -6,6 +6,8 @@
 
 ### If there are things you want to be able to do, but can't figure out how; put in an issue using the issues tab!
 
+### To install EDirect, follow the instructions here:  https://www.ncbi.nlm.nih.gov/books/NBK179288/
+
 ## Posting
 ### The following items are reasonable to post on this page:
     Pull requests with working EDirect scripts
