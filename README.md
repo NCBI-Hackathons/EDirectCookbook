@@ -1,6 +1,10 @@
 # EDirect_EUtils_API_Cookbook
 
+## Usage
 
+### Just copy and paste commands off the page.  Modify the search strings to work for you!
+
+## Posting
 ### The following items are reasonable to post on this page:
     Pull requests with working EDirect scripts
     Issues citing specific use cases and requesting EDirect scripts
