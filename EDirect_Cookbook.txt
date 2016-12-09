@@ -1,0 +1,58 @@
+EDirect_EUtils_API_Cookbook
+============================
+
+Gene aliases
+--------------------
+esearch -db gene -query "Liver cancer AND Homo sapiens" | efetch -format docsum | xtract -pattern DocumentSummary -element Name OtherAliases OtherDesignations
+
+Genomic sequence fasta files from RefSeq assembly for a taxon
+-----------------------------------------------------------
+wget `esearch -db assembly -query "Leptospira alstonii" | efetch -format docsum | xtract -pattern FtpPath -sep "\n" -element FtpPath | grep GCF | awk -F"/" '{print $0"/"$NF"_genomic.fna.gz"}'`
+
+Getting WGS contigs from nucleotide
+------------------------------------
+esearch -db nuccore -query "LKAM01" | efetch -format fasta
+
+Protein sequences from nucleotide accessions
+-------------------------------------------------
+cat accs_file | epost -db nuccore -format acc | elink -target protein | efetch -format fasta
+
+Complete formal taxonomy (KPCOFG) for taxids
+--------------------------------------------
+efetch -db taxonomy -id 9606,1234,81726 -format xml | xtract -pattern Taxon -tab "," -first TaxId ScientificName -group Taxon -KING "(-)" -PHYL "(-)" -CLSS "(-)" -ORDR "(-)" -FMLY "(-)" -GNUS "(-)" -block "/Taxon" -match "Rank:kingdom" -KING ScientificName -block "/Taxon" -match "Rank:phylum" -PHYL ScientificName -block "/Taxon" -match "Rank:class" -CLSS ScientificName -block "/Taxon" -match "Rank:order" -ORDR ScientificName -block "/Taxon" -match "Rank:family" -FMLY ScientificName -block "/Taxon" -match "Rank:genus" -GNUS ScientificName -group Taxon -tab "," -element "&KING" "&PHYL" "&CLSS" "&ORDR" "&FMLY" "&GNUS"
+
+UniProt IDs from gene symbols
+-----------------------------
+esearch -db gene -query "tp53[preferred symbol] AND human[organism]" | elink -target protein | esummary | xtract -pattern DocumentSummary -element Caption SourceDb | grep -E '^[OPQ][0-9][A-Z0-9]{3}[0-9]|^[A-NR-Z]0-9{1,2}'
+
+Retrieve taxids from list of genome accession numbers
+---------------------------------------------------------
+cat genome_accession.txt | epost -db nuccore -format acc | esummary | xtract -pattern DocumentSummary -element AccessionVersion TaxId
+
+Convert Article's DOI to PMID
+------------------------------
+esearch -db pubmed -query "10.1111/j.1468-3083.2012.04708.x" | esummary | xtract -pattern DocumentSummary -block ArticleId -sep "\t " -tab "\n" -element IdType,Value | grep -E '^pubmed|doi'
+
+Organism specific meta-data from NCBI genome database
+------------------------------------------------------
+esearch -db genome -query "22954[uid]" | elink -target bioproject | efetch -format xml | xtract -pattern DocumentSummary -element Salinity OxygenReq OptimumTemperature TemperatureRange Habitat
+
+Status of records from PubMed search
+-------------------------------------
+esearch -db pubmed -query "pde3a AND 2016[dp]" | esummary | xtract -pattern DocumentSummary -element Id RecordStatus
+
+Sort results sequence length in nucleotide database
+----------------------------------------------------
+esearch -db nuccore -query "bacillus[orgn] AND biomol_rRNA[prop] AND 1500:1560[slen]" | esummary | xtract -pattern DocumentSummary -element Slen Extra | sort -rnk 1
+
+Meta data from assembly
+-----------------------
+esearch -db assembly -query "mammals[orgn] AND latest[filter]" |efetch -format docsum |xtract -pattern DocumentSummary -element Organism,SpeciesName,BioSampleAccn,LastMajorReleaseAccession -block Stat -if "@category" -equals chromosome_count -element Stat |grep -Pv "\t0$"
+
+HSPs in FASTA from a BLAST hit
+-------------------------------
+blastn -db nr -query in.fna -remote -outfmt "6 sacc sstart send" | xargs -n 3 sh -c 'efetch -db nuccore -id "$0" -seq_start "$1" -seq_stop "$2" -format fasta'
+
+Gene Ontology IDs for a given protein accession
+-----------------------------------------------
+epost -db protein -id BAD92651.1 -format acc | elink -target biosystems | efetch -format docsum | xtract -pattern externalid -element externalid | awk '{if ($0 ~ /GO/) print $0}'
