@@ -4,7 +4,7 @@
 
 ### Just copy and paste commands off the page.  Modify the search strings to work for you!
 
-### If there are things you want to be able to do, but can't figure out how, put in an issue using the issues tab!
+### If there are things you want to be able to do with EDirect, but can't figure out how, put in an issue using the Issues tab!
 
 ### To install EDirect, follow the instructions here:  https://www.ncbi.nlm.nih.gov/books/NBK179288/
 
