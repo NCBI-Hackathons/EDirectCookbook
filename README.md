@@ -25,19 +25,27 @@
 ### Gene Aliases
 
 Description (optional):
+
 Written by: NCBI Folks (12/6/2016)
+
 Confirmed by:
+
 Databases: gene
 
 ```
-esearch -db gene -query "Liver cancer AND Homo sapiens" | efetch -format docsum | xtract   -pattern DocumentSummary -element Name OtherAliases OtherDesignations
+esearch -db gene -query "Liver cancer AND Homo sapiens" | \
+efetch -format docsum | \
+xtract -pattern DocumentSummary -element Name OtherAliases OtherDesignations
 ```
 
 ### Genomic sequence fastas from RefSeq assembly for specified taxonomic designation
 
 Description (optional):
+
 Written by: NCBI Folks (12/6/2016)
+
 Confirmed by:
+
 Databases: assembly
 
 ```
@@ -190,8 +198,11 @@ esearch -db pubmed -query "traumatic brain injury athletes" -datetype PDAT -mind
 ### Look up the publication date for thousands of PMIDs 
 
 Description (optional):
+
 Written by: NCBI Folks (12/15/2016)
+
 Confirmed by:
+
 Databases: pubmed
 
 ```
