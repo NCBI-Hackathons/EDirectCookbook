@@ -2,6 +2,8 @@
 
 ## Usage
 
+* * *
+
 ### Just copy and paste commands off the page.  Modify the search strings to work for you!
 
 ### If there are things you want to be able to do with EDirect, but can't figure out how, put in an issue using the Issues tab!
