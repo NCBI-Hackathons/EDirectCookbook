@@ -4,23 +4,23 @@
 
 **Just copy and paste commands off the page.  Modify the search strings to work for you!**
 
-**If there are things you want to be able to do with EDirect, but can't figure out how, put in an issue using the Issues tab!**
+**If there are things you want to be able to do with EDirect, but can't figure out how, create an Issue using the Issues tab!**
 
 **To install EDirect, follow the instructions in ["Entrez Direct: E-utilities on the Unix Command Line"](https://www.ncbi.nlm.nih.gov/books/NBK179288/)**
 
-## Posting
+## How to contribute
 
-### Create an issue to:
+### Create an Issue to:
 
 * Request an EDirect script to accomplish a task, citing specific use cases.
 * Present a non-working EDirect script and ask for a fix
 * Identify non-working scripts listed below
 	
-### Create a pull request to:
+### Create a Pull Request to:
 
 * Add a working EDirect script to the list below
 * Modify or optimize an EDirect script listed below
-* Update the "Confirmed by:" date/version of a listed EDirect script with confirmation that it is still current.
+* Update the "Confirmed by:" date/version of a listed EDirect script with confirmation that it is still valid.
 	
 ## Best Practices for EDirect:
 
@@ -46,7 +46,7 @@ esearch -db gene -query "Liver cancer AND Homo sapiens" | \
 efetch -format docsum | \
 xtract -pattern DocumentSummary -element Name OtherAliases OtherDesignations
 ```
-
+* * *
 ### Genomic sequence fastas from RefSeq assembly for specified taxonomic designation
 Description (optional):  
 Written by: NCBI Folks (12/14/2016)  
@@ -257,4 +257,17 @@ epost -db pubmed | \
 efetch -format xml | \
 xtract -pattern PubmedArticle -element MedlineCitation/PMID \
 -block PubDate -sep " " -element Year,Month MedlineDate
+```
+
+### Download GEO Data from a BioProject Accession 
+
+Description (optional):  
+Written by: NCBI Folks (12/16/2016)  
+Confirmed by:  
+Databases: gds  
+
+```
+esearch -db gds -query "PRJNA313294[ACCN]" | \
+efetch -format docsum | \
+xtract -pattern DocumentSummary -element FTPLink
 ```
