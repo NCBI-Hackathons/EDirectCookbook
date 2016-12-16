@@ -1,6 +1,5 @@
 # EDirect_EUtils_API_Cookbook
 
-## Basics
 
 **Just copy and paste commands off the page.  Modify the search strings to work for you!**
 
