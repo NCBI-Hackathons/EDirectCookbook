@@ -6,27 +6,31 @@
 
 **If there are things you want to be able to do with EDirect, but can't figure out how, put in an issue using the Issues tab!**
 
-** To install EDirect, follow the instructions in ["Entrez Direct: E-utilities on the Unix Command Line"](https://www.ncbi.nlm.nih.gov/books/NBK179288/)**
+**To install EDirect, follow the instructions in ["Entrez Direct: E-utilities on the Unix Command Line"](https://www.ncbi.nlm.nih.gov/books/NBK179288/)**
 
 ## Posting
 
 ### Create an issue to:
-	* Request an EDirect script to accomplish a task, citing specific use cases.
-	* Present a non-working EDirect script and ask for a fix
-	* Identify non-working scripts listed below
+
+* Request an EDirect script to accomplish a task, citing specific use cases.
+* Present a non-working EDirect script and ask for a fix
+* Identify non-working scripts listed below
 	
 ### Create a pull request to:
-	* Add a working EDirect script to the list below
-	* Modify or optimize an EDirect script listed below
-	* Update the "Confirmed by:" date/version of a listed EDirect script with confirmation that it is still current.
+
+* Add a working EDirect script to the list below
+* Modify or optimize an EDirect script listed below
+* Update the "Confirmed by:" date/version of a listed EDirect script with confirmation that it is still current.
 	
 ## Best Practices for EDirect:
-	* Please keep to <50,000 expected hits (it simply won’t work)
-	* Please do not run from multiple processors on a compute farm
+
+* Please keep to <50,000 expected hits (it simply won’t work)
+* Please do not run from multiple processors on a compute farm
 
 For more information and documentation on EDirect, please see:
-	* [Entrez Direct: E-utilities on the Unix Command Line](https://www.ncbi.nlm.nih.gov/books/NBK179288/)
-	* [Insider's Guide to Accessing NLM Data: EDirect Overview](https://dataguide.nlm.nih.gov/edirect/overview.html)
+
+* [Entrez Direct: E-utilities on the Unix Command Line](https://www.ncbi.nlm.nih.gov/books/NBK179288/)
+* [Insider's Guide to Accessing NLM Data: EDirect Overview](https://dataguide.nlm.nih.gov/edirect/overview.html)
 
 **All items below come with no explicit or implicit warranty.  All code is as-is and produced for the bioinformatics community, from the bioinformatics community.**
 
