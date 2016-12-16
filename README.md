@@ -23,10 +23,10 @@
 ## EDirect Scripts
 
 ### Gene Aliases
-Description (optional):
-Written by: NCBI Folks (12/6/2016)
-Confirmed by:
-Databases: gene
+	Description (optional):
+	Written by: NCBI Folks (12/6/2016)
+	Confirmed by:
+	Databases: gene
 ```
 esearch -db gene -query "Liver cancer AND Homo sapiens" | \
 efetch -format docsum | \
