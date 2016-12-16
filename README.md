@@ -38,5 +38,5 @@
 | Get all Gene Ontology IDs for a given protein accession | NCBI Folks | epost -db protein -id BAD92651.1 -format acc \| elink -target biosystems \| efetch -format docsum \| xtract -pattern externalid -element externalid \| awk '{if ($0 ~ /GO/) print $0}' | |  
 | Get the ten most frequently-occurring authors for a set of articles | Mike Davidson (NLM) | 	esearch -db pubmed -query "traumatic brain injury athletes" -datetype PDAT -mindate 2015 -maxdate 2016 \| efetch -format xml \|	xtract -pattern Author -sep " " -element LastName,Initials \| sort-uniq-count-rank \| head -n 10|||
 |   Look up the publication date for thousands of PMIDs | NCBI Folks | cat table_of_pubmed_ids \| epost -db pubmed \| efetch -format xml \| xtract -pattern PubmedArticle -element MedlineCitation/PMID -block PubDate -sep " " -element Year,Month MedlineDate ||| 
-|   Download GEO Data from a BioProject Accession | NCBI Folks | esearch -db gds -query PRJNA313294[ACCN] \| efetch -format docsum \| xtract -pattern DocumentSummary -element FTPLink |||
+|   Download GEO Data from a BioProject Accession | NCBI Folks | esearch -db gds -query "PRJNA313294[ACCN]" \| efetch -format docsum \| xtract -pattern DocumentSummary -element FTPLink |||
 
