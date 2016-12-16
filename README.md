@@ -12,7 +12,7 @@
 
 ### Create an Issue to:
 
-* Request an EDirect script to accomplish a task, citing specific use cases.
+* Request an EDirect script to accomplish a task, citing specific use cases
 * Present a non-working EDirect script and ask for a fix
 * Identify non-working scripts listed below
 	
@@ -20,7 +20,7 @@
 
 * Add a working EDirect script to the list below
 * Modify or optimize an EDirect script listed below
-* Update the "Confirmed by:" date/version of a listed EDirect script with confirmation that it is still valid.
+* Update the "Confirmed by:" date/version of a listed EDirect script with confirmation that it is still valid
 	
 ## Best Practices for EDirect:
 
@@ -32,7 +32,9 @@ For more information and documentation on EDirect, please see:
 * [Entrez Direct: E-utilities on the Unix Command Line](https://www.ncbi.nlm.nih.gov/books/NBK179288/)
 * [Insider's Guide to Accessing NLM Data: EDirect Overview](https://dataguide.nlm.nih.gov/edirect/overview.html)
 
-**All items below come with no explicit or implicit warranty.  All code is as-is and produced for the bioinformatics community, from the bioinformatics community.**
+**All items below come with no explicit or implicit warranty.**
+
+**All code is as-is and produced for the bioinformatics community, from the bioinformatics community.**
 
 ## EDirect Scripts
 
@@ -46,7 +48,7 @@ esearch -db gene -query "Liver cancer AND Homo sapiens" | \
 efetch -format docsum | \
 xtract -pattern DocumentSummary -element Name OtherAliases OtherDesignations
 ```
-* * *
+
 ### Genomic sequence fastas from RefSeq assembly for specified taxonomic designation
 Description (optional):  
 Written by: NCBI Folks (12/14/2016)  
@@ -73,7 +75,7 @@ esearch -db nuccore -query "LKAM01" | efetch -format fasta
 
 ### Get protein sequences from nucleotide accessions
 
-Description (optional): 
+Description (optional):  
 Written by: NCBI Folks (12/14/2016)  
 Confirmed by:  
 Databases: nuccore, protein  
@@ -233,7 +235,7 @@ awk '{if ($0 ~ /GO/) print $0}'
  
 Description (optional): Searches PubMed for the string "traumatic brain injury athletes", restricts results to those published in 2015 and 2016, retrieves the full XML records for each of the search results, extracts the last name and initials of every author on every record, sorts the authors by frequency of occurrence in the results set, and presents the top ten most frequently-occurring authors, along with the number of times that author appeared.  
 Written by: Mike Davidson (NLM) (12/15/2016)  
-Confirmed by: Mike Davidson (NLM) (12/16/2016) 
+Confirmed by: Mike Davidson (NLM) (12/16/2016)  
 Databases: pubmed  
 
 ```
