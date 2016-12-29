@@ -61,7 +61,7 @@ awk -F"/" '{print $0"/"$NF"_genomic.fna.gz"}'`
 ```
 
 ```
-(For larger sets of data the above may fail as wget may not accept large number arguments.
+(For larger sets of data the above may fail as wget may not accept a very large number of arguments.
 The command below should work for all.)
 
 esearch -db assembly -query "Leptospira alstonii[ORGN] AND latest[SB]" | \
