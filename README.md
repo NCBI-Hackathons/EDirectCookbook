@@ -247,9 +247,9 @@ head -n 10
 
 ### Look up the publication date for thousands of PMIDs (option one)
 
-Description (optional):  Takes a file which contains a list of PMIDs (table_of_pubmed_ids) and uses `cat` to access the contents of the file, `epost` to post the PMIDs to the history server, `efetch` to retrieve the records and `xtract` to extract PMID and Publication Date.
+Description (optional):  Takes a file which contains a list of PMIDs (table_of_pubmed_ids) and uses `cat` to access the contents of the file, `epost` to post the PMIDs to the history server, `efetch` to retrieve the records and `xtract` to extract PMID and Publication Date.  
 Written by: NCBI Folks (12/15/2016)  
-Confirmed by:  Mike Davidson (NLM) (v6.30, 2/17/2017)
+Confirmed by:  Mike Davidson (NLM) (v6.30, 2/17/2017)  
 Databases: pubmed  
 
 ```
@@ -262,9 +262,9 @@ xtract -pattern PubmedArticle -element MedlineCitation/PMID \
 
 ### Look up the publication date for thousands of PMIDs (option two)
 
-Description (optional): Takes a file which contains a list of PMIDs (table_of_pubmed_ids) and `epost -input` to access the contents of the file and post the PMIDs to the history server, `efetch` to retrieve the records and `xtract` to extract PMID and Publication Date. 
-Written by: Mike Davidson (2/17/2017)
-Confirmed by:  Mike Davidson (NLM) (v6.30, 2/17/2017) 
+Description (optional): Takes a file which contains a list of PMIDs (table_of_pubmed_ids) and `epost -input` to access the contents of the file and post the PMIDs to the history server, `efetch` to retrieve the records and `xtract` to extract PMID and Publication Date.  
+Written by: Mike Davidson (2/17/2017)  
+Confirmed by:  Mike Davidson (NLM) (v6.30, 2/17/2017)  
 Databases: pubmed  
 
 ```
