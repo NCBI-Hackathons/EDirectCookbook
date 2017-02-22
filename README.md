@@ -165,7 +165,7 @@ xtract -pattern DocumentSummary -element Salinity OxygenReq OptimumTemperature T
 
 Description (optional):  
 Written by: NCBI Folks (12/14/2016)  
-Confirmed by: Mike Davidson (NLM) (12/16/2016, v5.80)
+Confirmed by: Mike Davidson (NLM) (12/16/2016, v5.80)  
 Databases: pubmed  
 
 ```
