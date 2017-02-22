@@ -174,6 +174,17 @@ esummary | \
 xtract -pattern DocumentSummary -element Id RecordStatus
 ```
 
+### Conduct a PubMed search and retrieve the results as a list of PMIDs
+
+Description (optional):  
+Written by: Mike Davidson (2/22/2017)  
+Confirmed by: Mike Davidson (NLM) (2/22/2017, v6.30)  
+Databases: pubmed  
+
+```
+esearch -db pubmed -query "seasonal affective disorder" | efetch -format uid
+```
+
 ### Sort the hits by sequence length in nucleotide database
 
 Description (optional):  
@@ -245,6 +256,21 @@ sort-uniq-count-rank | \
 head -n 10
 ```
 
+### Get the ten funding agencies who are most active in funding articles on a particular topic
+
+Description (optional): Searches PubMed for the string "diabetes AND pregnancy", restricts results to those published in 2014 through 2016, retrieves the full XML records for each of the search results, extracts the funding agencies for every  grant on every record, sorts the agencies by frequency of occurrence in the results set, and presents the top ten most frequently-occurring agencies, along with the number of times that agency appeared.  
+Written by: Mike Davidson (2/17/2017)  
+Confirmed by:  Mike Davidson (NLM) (v6.30, 2/17/2017)  
+Databases: pubmed  
+
+```
+esearch -db pubmed -query "diabetes AND pregnancy" -datetype PDAT -mindate 2014 -maxdate 2016 | \
+efetch -format xml | \
+xtract -pattern Grant -element Agency | \
+sort-uniq-count-rank | \
+head -n 10
+```
+
 ### Look up the publication date for thousands of PMIDs (option one)
 
 Description (optional):  Takes a file which contains a list of PMIDs (table_of_pubmed_ids) and uses `cat` to access the contents of the file, `epost` to post the PMIDs to the history server, `efetch` to retrieve the records and `xtract` to extract PMID and Publication Date.  
@@ -274,6 +300,20 @@ xtract -pattern PubmedArticle -element MedlineCitation/PMID \
 -block PubDate -sep " " -element Year,Month MedlineDate
 ```
 
+### Find the first author for a set of PubMed records
+
+Description (optional): Outputs the PMID and first author's last name and initials for one or more PubMed records
+Written by: Mike Davidson (2/17/2017)  
+Confirmed by:  Mike Davidson (NLM) (v6.30, 2/17/2017)  
+Databases: pubmed  
+
+```
+efetch -db pubmed -id 16940437 -format xml | \
+xtract -pattern PubmedArticle -element MedlineCitation/PMID \
+-block Author -position first -sep " " -element LastName,Initials
+```
+
+
 ### Download GEO Data from a BioProject Accession 
 
 Description (optional):  
@@ -285,4 +325,18 @@ Databases: gds
 esearch -db gds -query "PRJNA313294[ACCN]" | \
 efetch -format docsum | \
 xtract -pattern DocumentSummary -element FTPLink
+```
+
+### Look up the publication date for thousands of PMIDs (option two)
+
+Description (optional): Takes a file which contains a list of PMIDs (table_of_pubmed_ids) and `epost -input` to access the contents of the file and post the PMIDs to the history server, `efetch` to retrieve the records and `xtract` to extract PMID and Publication Date.  
+Written by: Mike Davidson (2/17/2017)  
+Confirmed by:  Mike Davidson (NLM) (v6.30, 2/17/2017)  
+Databases: pubmed  
+
+```
+epost -input table_of_pubmed_ids -db pubmed | \
+efetch -format xml | \
+xtract -pattern PubmedArticle -element MedlineCitation/PMID \
+-block PubDate -sep " " -element Year,Month MedlineDate
 ```
