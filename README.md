@@ -3,11 +3,13 @@
 
 **Just copy and paste commands off the page.  Modify the search strings to work for you!**
 
-**If there are things you want to be able to do with EDirect, but can't figure out how, create an Issue using the Issues tab!**
+**If there are things you want to be able to do with EDirect, but can't figure out how, you can ask the community for help by creating an Issue. See below, under "How to contribute," for more information.**
 
 **To install EDirect, follow the instructions in ["Entrez Direct: E-utilities on the Unix Command Line"](https://www.ncbi.nlm.nih.gov/books/NBK179288/)**
 
 ## How to contribute
+
+You can contribute to this page through GitHub. (If you are not already viewing the GitHub version of this page, please click the "View on GitHub" button at the top of the page.)  Using GitHub, you can create Issues or Pull Requests to contribute to the cookbook.
 
 ### Create an Issue to:
 
