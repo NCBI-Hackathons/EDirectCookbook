@@ -51,14 +51,24 @@ xtract -pattern DocumentSummary -element Name OtherAliases OtherDesignations
 ### Genomic sequence fastas from RefSeq assembly for specified taxonomic designation
 Description (optional):  
 Written by: NCBI Folks (12/14/2016)  
-Confirmed by: Mike Davidson (NLM) (12/16/2016, v5.80)   
+Confirmed by: Peter Cooper (NCBI) and Wayne Matten (NCBI) (12/29/2016, v6.00)   
 Databases: assembly  
 ```
-wget `esearch -db assembly -query "Leptospira alstonii" | \
+wget `esearch -db assembly -query "Leptospira alstonii[ORGN] AND latest[SB]" | \
 efetch -format docsum | \
-xtract -pattern FtpPath -sep "\n" -element FtpPath | \
-grep GCF | \
+xtract -pattern DocumentSummary -element FtpPath_RefSeq | \
 awk -F"/" '{print $0"/"$NF"_genomic.fna.gz"}'`
+```
+
+```
+(For larger sets of data the above may fail as wget may not accept a very large number of arguments.
+The command below should work for all.)
+
+esearch -db assembly -query "Leptospira alstonii[ORGN] AND latest[SB]" | \
+efetch -format docsum | \
+xtract -pattern DocumentSummary -element FtpPath_RefSeq | \
+awk -F"/" '{print $0"/"$NF"_genomic.fna.gz"}' | \
+xargs wget
 ```
 
 ### Get organellar contigs from genbank
