@@ -31,13 +31,26 @@ You can contribute to this page through GitHub. (If you are not already viewing 
 For more information and documentation on EDirect, please see:
 
 * [Entrez Direct: E-utilities on the Unix Command Line](https://www.ncbi.nlm.nih.gov/books/NBK179288/)
-* [Insider's Guide to Accessing NLM Data: EDirect Overview](https://dataguide.nlm.nih.gov/edirect/overview.html)
+* [Insiders Guide to Accessing NLM Data: EDirect Overview](https://dataguide.nlm.nih.gov/edirect/overview.html)
 
 **All items below come with no explicit or implicit warranty.**
 
 **All code is as-is and produced for the bioinformatics community, from the bioinformatics community.**
 
 ## EDirect Scripts
+
+### Get latitiude and longitude for SRA Datasets (e.g. outbreaks and metagenomes)
+Description (optional):  
+Written by: BB, Mike D, Rob Edwards (4/12/2017)  
+Confirmed by:  
+Databases: SRA, BioSample 
+
+```
+for i in $(cat sra_ids.txt); do ll=$(esearch -db sra -query $i | \
+elink -target biosample | efetch -format docsum | \
+xtract -pattern DocumentSummary -block Attribute -if Attribute@attribute_name -equals lat_lon -element Attribute); \
+echo -e "$i\t$ll"; done
+```
 
 ### Gene Aliases
 Description (optional):  
