@@ -39,6 +39,18 @@ For more information and documentation on EDirect, please see:
 
 ## EDirect Scripts
 
+
+### Get all SRA runs for a given BioProject 
+Description (optional):  
+Written by: Bob Sanders (3/22/2017)  
+Confirmed by:  
+Databases: SRA, BioProject 
+
+```
+esearch -db bioproject -query "PRJNA356464" | elink -target sra | efetch -format docsum | \
+xtract -pattern DocumentSummary -ACC @acc -block DocumentSummary -element "&ACC"
+```
+
 ### Get latitiude and longitude for SRA Datasets (e.g. outbreaks and metagenomes)
 Description (optional):  
 Written by: BB, Mike D, Rob Edwards (4/12/2017)  
