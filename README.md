@@ -64,6 +64,16 @@ xtract -pattern DocumentSummary -block Attribute -if Attribute@attribute_name -e
 echo -e "$i\t$ll"; done
 ```
 
+### Get run sizes (in bp) for SRA Datasets
+Description (optional): This retrieves the SRR id and the size in bp of the run from a file (`ids.txt`) of SRR IDs. You can also change `bases` to `size_MB`to get the size of the dataset in MB. _Question: Does the size in MB include the sequence identifiers (i.e. the size of the file) or just the sequences?_
+Written by: Rob Edwards (7/6/2017)
+Confirmed by:
+Databases: SRA
+```
+epost -db sra -input ids.txt -format acc | esummary -format runinfo -mode xml | xtract -pattern Row -element Run,bases
+```
+
+
 ### Gene Aliases
 Description (optional):  
 Written by: NCBI Folks (12/14/2016)  
