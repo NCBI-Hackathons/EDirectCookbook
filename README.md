@@ -374,16 +374,28 @@ efetch -format docsum | \
 xtract -pattern DocumentSummary -element FTPLink
 ```
 
-### Look up the publication date for thousands of PMIDs (option two)
+### Extract all MeSH Headings from a given PMID
 
-Description (optional): Takes a file which contains a list of PMIDs (table_of_pubmed_ids) and `epost -input` to access the contents of the file and post the PMIDs to the history server, `efetch` to retrieve the records and `xtract` to extract PMID and Publication Date.  
-Written by: Mike Davidson (2/17/2017)  
-Confirmed by:  Mike Davidson (NLM) (v6.30, 2/17/2017)  
+Description (optional): Retrieves the PMID of a PubMed record, followed by a pipe-delimitted list of MeSH Descriptors for a PMID.  
+Written by: Mike Davidson (10/02/2017)  
+Confirmed by: Mike Davidson (NLM) (v7.30, 10/02/2017)  
 Databases: pubmed  
 
 ```
-epost -input table_of_pubmed_ids -db pubmed | \
-efetch -format xml | \
-xtract -pattern PubmedArticle -element MedlineCitation/PMID \
--block PubDate -sep " " -element Year,Month MedlineDate
+efetch -db pubmed -id 24102982 -format xml | \
+xtract -pattern PubmedArticle -tab "|" -element MedlineCitation/PMID \
+-block MeshHeading -tab "|" -element DescriptorName
+```
+
+
+### Extract all MeSH Headings and Subheadings from a given PMID
+Description (optional): Retrieves the PMID of a PubMed record, followed by a pipe-delimitted list of MeSH Descriptors and Qualifiers for a PMID. Each Descriptor is followed by any attached qualifiers, separated by "/".  
+Written by: Mike Davidson (10/02/2017)  
+Confirmed by: Mike Davidson (NLM) (v7.30, 10/02/2017)  
+Databases: pubmed  
+
+```
+efetch -db pubmed -id 24102982 -format xml | \
+xtract -pattern PubmedArticle -tab "|" -element MedlineCitation/PMID \
+-block MeshHeading -tab "|" -sep "/" -element DescriptorName,QualifierName
 ```
