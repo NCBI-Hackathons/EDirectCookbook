@@ -341,10 +341,10 @@ xtract -pattern DocumentSummary -element FTPLink
 
 ### Extract all MeSH Headings from a given PMID
 
-Description (optional): Retrieves the PMID of a PubMed record, followed by a pipe-delimitted list of MeSH Descriptors for a PMID. 
-Written by: Mike Davidson (10/02/2017)
-Confirmed by: Mike Davidson (NLM) (v7.30, 10/02/2017)
-Databases: pubmed
+Description (optional): Retrieves the PMID of a PubMed record, followed by a pipe-delimitted list of MeSH Descriptors for a PMID.  
+Written by: Mike Davidson (10/02/2017)  
+Confirmed by: Mike Davidson (NLM) (v7.30, 10/02/2017)  
+Databases: pubmed  
 
 ```
 efetch -db pubmed -id 24102982 -format xml | \
@@ -354,10 +354,10 @@ xtract -pattern PubmedArticle -tab "|" -element MedlineCitation/PMID \
 
 
 ### Extract all MeSH Headings and Subheadings from a given PMID
-Description (optional): Retrieves the PMID of a PubMed record, followed by a pipe-delimitted list of MeSH Descriptors and Qualifiers for a PMID. Each Descriptor is followed by any attached qualifiers, separated by "/"
-Written by: Mike Davidson (10/02/2017)
-Confirmed by: Mike Davidson (NLM) (v7.30, 10/02/2017)
-Databases: pubmed
+Description (optional): Retrieves the PMID of a PubMed record, followed by a pipe-delimitted list of MeSH Descriptors and Qualifiers for a PMID. Each Descriptor is followed by any attached qualifiers, separated by "/".  
+Written by: Mike Davidson (10/02/2017)  
+Confirmed by: Mike Davidson (NLM) (v7.30, 10/02/2017)  
+Databases: pubmed  
 
 ```
 efetch -db pubmed -id 24102982 -format xml | \
