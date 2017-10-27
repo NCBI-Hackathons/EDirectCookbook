@@ -325,6 +325,22 @@ xtract -pattern PubmedArticle -element MedlineCitation/PMID \
 -block Author -position first -sep " " -element LastName,Initials
 ```
 
+### Find the first author and any other authors who contributed equally for a set of PubMed records
+
+Description (optional): Outputs the PMID and first author's last name and initials for one or more PubMed records. If the record indicates equal contributors to the first author, the last name and initials for all equal contributors will also be output, separated by commas.  
+Written by: Mike Davidson (10/27/2017)  
+Confirmed by:  Mike Davidson (NLM) (v7.40, 10/27/2017)  
+Databases: pubmed  
+
+```
+efetch -db pubmed -id 22358458,26877147 -format xml | \
+xtract -pattern PubmedArticle -element MedlineCitation/PMID \
+-block Author -position first -sep " " -tab ", " -element LastName,Initials -EQUAL Author@EqualContrib \
+-block Author -if "+" -is-not 1 \
+-and Author@EqualContrib -equals Y \
+-and "&EQUAL" -equals Y \
+-sep " " -tab ", " -element LastName,Initials
+```
 
 ### Download GEO Data from a BioProject Accession 
 
