@@ -39,6 +39,15 @@ For more information and documentation on EDirect, please see:
 
 ## EDirect Scripts
 
+### Get child taxids for a node in NCBI taxonomy 
+Description (optional):  Note:  Options for parsing nodes.dmp from NCBI Taxonomy are cited in issue #25, intentionally left open
+Written by: Scott McGinnis (11/17/2017)  
+Confirmed by:  
+Databases: Taxonomy
+
+```
+esearch -db taxonomy -query "vertebrata[orgn]" | efetch -db taxonomy -format docsum | xtract -pattern DocumentSummary -if Rank -equals family -element Id,Division,ScientificName,CommonName | more
+```
 
 ### Get all SRA runs for a given BioProject 
 Description (optional):  
