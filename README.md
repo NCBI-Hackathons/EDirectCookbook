@@ -49,6 +49,16 @@ Databases: Taxonomy
 esearch -db taxonomy -query "vertebrata[orgn]" | efetch -db taxonomy -format docsum | xtract -pattern DocumentSummary -if Rank -equals family -element Id,Division,ScientificName,CommonName | more
 ```
 
+### Get all SRA runs for a BioProject based on an SRA Run ID
+Description: Given an SRA Run ID (e.g. SRR532256) that is a member of a BioProject that has additional runs, retrieve all the other run IDs. This is a variant of the BioProject call below.
+Written by: Rob Edwards (1/11/2018)
+Confirmed by:
+Databases: SRA, BioProject
+
+```
+esearch -db sra -query "SRR532256" |  efetch -format docsum | xtract -pattern Runs -ACC @acc  -element "&ACC"
+```
+
 ### Get all SRA runs for a given BioProject 
 Description (optional):  
 Written by: Bob Sanders (3/22/2017)  
