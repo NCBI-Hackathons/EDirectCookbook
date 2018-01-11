@@ -50,13 +50,15 @@ esearch -db taxonomy -query "vertebrata[orgn]" | efetch -db taxonomy -format doc
 ```
 
 ### Get all SRA runs for a BioProject based on an SRA Run ID
-Description: Given an SRA Run ID (e.g. SRR532256) that is a member of a BioProject that has additional runs, retrieve all the other run IDs. This is a variant of the BioProject call below.
+Description: Given an SRA Run ID (e.g. SRR5088933) that is a member of a BioProject that has additional runs, retrieve all the other run IDs. This is a variant of the BioProject call below. The example run is from [PRJNA356544](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA356544) which has 12 experiments, each with a single run, and we should return 12 runs.
 Written by: Rob Edwards (1/11/2018)
 Confirmed by:
 Databases: SRA, BioProject
 
 ```
-esearch -db sra -query "SRR532256" |  efetch -format docsum | xtract -pattern Runs -ACC @acc  -element "&ACC"
+esearch -db sra -query "SRR5088933" |  efetch -format docsum | xtract -pattern Bioproject  -element Bioproject | \
+xargs -i esearch -db bioproject -query "{}" | elink -target sra | efetch -format docsum | \
+xtract -pattern Runs -ACC @acc  -element "&ACC"
 ```
 
 ### Get all SRA runs for a given BioProject 
