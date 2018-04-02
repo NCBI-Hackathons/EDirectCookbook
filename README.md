@@ -434,3 +434,19 @@ efetch -db pubmed -id 24102982 -format xml | \
 xtract -pattern PubmedArticle -tab "|" -element MedlineCitation/PMID \
 -block MeshHeading -tab "|" -sep "/" -element DescriptorName,QualifierName
 ```
+
+### Search for articles by authors affiliated with a specific institution by matching two partial affiliation strings.
+
+Description (optional): Searching PubMed for two affiliation strings ANDed together (e.g. "translational medicine\[AD] AND thomas jefferson\[AD]") will retrieve all records that have both strings listed somewhere in the record's Affiliation data, but does not require both strings be listed on the same author's affiliation. To generate a list of PMIDs where both strings are present in the same affiliation element, use the following script.  
+Written by: Mike Davidson (4/2/2018)  
+Confirmed by:  Mike Davidson (NLM) (v8.10, 4/2/2018)  
+Databases: pubmed  
+
+```
+esearch -db pubmed -query "translational medicine[ad] AND thomas jefferson[ad]" | \
+efetch -format xml | \
+xtract -pattern PubmedArticle -PMID MedlineCitation/PMID \
+-block Affiliation -if Affiliation -contains "translational medicine" -and Affiliation -contains "thomas jefferson" \
+-tab "\n" -element "&PMID" | \
+sort -n | uniq
+```
