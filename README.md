@@ -453,6 +453,7 @@ sort -n | uniq
 
 ### Get Gene Sequences for a bacterial protein with a given name
 Description (optional): Retrieves the DNA sequences of a certain protein in bacteria that are RefSeq filtered.
+
 Written by: Moamen Elmassry (05/04/2018)  
 Confirmed by:
 Databases: protein
