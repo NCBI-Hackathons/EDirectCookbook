@@ -450,3 +450,15 @@ xtract -pattern PubmedArticle -PMID MedlineCitation/PMID \
 -tab "\n" -element "&PMID" | \
 sort -n | uniq
 ```
+
+### Get Gene Sequences for a bacterial protein with a given name
+Description (optional): Retrieves the DNA sequences of a certain protein in bacteria that are RefSeq filtered.
+Written by: Moamen Elmassry (05/04/2018)  
+Confirmed by:
+Databases: protein
+
+```
+esearch -db protein -query "beta glucuronidase" | \
+efilter -source refseq -organism bacteria | \
+efetch -db protein -format fasta_cds_na
+```
