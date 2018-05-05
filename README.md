@@ -462,3 +462,4 @@ esearch -db protein -query "beta glucuronidase" | \
 efilter -source refseq -organism bacteria | \
 efetch -db protein -format fasta_cds_na
 ```
+
