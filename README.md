@@ -39,6 +39,17 @@ For more information and documentation on EDirect, please see:
 
 ## EDirect Scripts
 
+### Get all proteins from a nucleotide interval in a genome
+
+Description (optional):  
+Written by: Peter Cooper
+Confirmed by: Ben Busby 
+Databases: Taxonomy
+
+```
+efetch -db nuccore -id NZ_AZKP01000022.1 -seq_start 149413 -seq_stop 154038 -format gbc | xtract -insd CDS INSDInterval_from INSDInterval_to protein_id product
+```
+
 ### Get child taxids for a node in NCBI taxonomy 
 Description (optional):  Note:  Options for parsing nodes.dmp from NCBI Taxonomy are cited in issue #25, intentionally left open
 Written by: Scott McGinnis (11/17/2017)  
