@@ -461,3 +461,12 @@ xtract -pattern PubmedArticle -PMID MedlineCitation/PMID \
 -tab "\n" -element "&PMID" | \
 sort -n | uniq
 ```
+### Search for PMC articles citing a gived PubMed articler; retrieve title, source, ID
+
+Description: Retrieve information about all PMC articles (wihich have free fulltext available) which cite a gived PubMed article
+Written by: Lukas Wagner (08/16/2018)
+Databases: pubmed, pmc
+
+esearch -db pubmed -query 23618408 | elink -name pubmed_pmc_refs -target pmc | \
+efetch -format docsum | \
+xtract -pattern DocumentSummary -element Title -element Source -block ArticleId -if "IdType" -equals pmcid -element Value
