@@ -467,6 +467,8 @@ Description: Retrieve information about all PMC articles (wihich have free fullt
 Written by: Lukas Wagner (08/16/2018)
 Databases: pubmed, pmc
 
+```
 esearch -db pubmed -query 23618408 | elink -name pubmed_pmc_refs -target pmc | \
 efetch -format docsum | \
 xtract -pattern DocumentSummary -element Title -element Source -block ArticleId -if "IdType" -equals pmcid -element Value
+```
