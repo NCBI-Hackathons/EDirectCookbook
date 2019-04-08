@@ -7,7 +7,7 @@
 
 **To install EDirect, follow the instructions in ["Entrez Direct: E-utilities on the Unix Command Line"](https://www.ncbi.nlm.nih.gov/books/NBK179288/)**
 
-**PLEASE UPDATE TO THE LATEST VERSION of E-Direct when possible to avoid a bug in older versions associated with [the new NCBI API rate limit policy and API keys](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/)
+**PLEASE UPDATE TO THE LATEST VERSION of E-Direct when possible to avoid a bug in older versions associated with [the new NCBI API rate limit policy and API keys](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/)**
 
 ## How to contribute
 
