@@ -7,6 +7,8 @@
 
 **To install EDirect, follow the instructions in ["Entrez Direct: E-utilities on the Unix Command Line"](https://www.ncbi.nlm.nih.gov/books/NBK179288/)**
 
+**PLEASE UPDATE TO THE LATEST VERSION of E-Direct when possible to avoid a bug in older versions associated with [the new NCBI API rate limit policy and API keys](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/)
+
 ## How to contribute
 
 You can contribute to this page through GitHub. (If you are not already viewing the GitHub version of this page, please click the "View on GitHub" button at the top of the page.)  Using GitHub, you can create Issues or Pull Requests to contribute to the cookbook.
@@ -27,6 +29,7 @@ You can contribute to this page through GitHub. (If you are not already viewing 
 
 * Please keep to <50,000 expected hits (it simply won’t work)
 * Please do not run from multiple processors on a compute farm
+* Update to latest version
 
 For more information and documentation on EDirect, please see:
 
