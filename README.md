@@ -475,3 +475,18 @@ esearch -db pubmed -query 23618408 | elink -name pubmed_pmc_refs -target pmc | \
 efetch -format docsum | \
 xtract -pattern DocumentSummary -element Title -element Source -block ArticleId -if "IdType" -equals pmcid -element Value
 ```
+
+### Given a taxon name, retrieve all RefSeq genomes for that taxon in FASTA format
+
+Description (optional): Takes in the scientific name of a taxon on the command line (should usually be species or strain level to keep number of results manageable), retrieves taxID using `esearch | efetch | xtract`, which is nested by process substitution into `elink | efilter | efetch`.  
+Written by: Peter Skewes-Cox (8/25/2017)  
+Confirmed by: 
+Databases: taxonomy, nuccore  
+
+```
+elink -db taxonomy -id $( esearch -db taxonomy -query "Hepatitis C virus" | \
+efetch -format docsum | \
+xtract -pattern DocumentSummary -element TaxId ) -target nuccore | \
+efilter -query "refseq" | \
+efetch -format fasta
+```
