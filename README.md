@@ -64,13 +64,15 @@ esearch -db taxonomy -query "vertebrata[orgn]" | efetch -db taxonomy -format doc
 ```
 
 ### Get all SRA runs for a BioProject based on an SRA Run ID
-Description: Given an SRA Run ID (e.g. SRR532256) that is a member of a BioProject that has additional runs, retrieve all the other run IDs. This is a variant of the BioProject call below.
+Description: Given an SRA Run ID (e.g. SRR5088933) that is a member of a BioProject that has additional runs, retrieve all the other run IDs. This is a variant of the BioProject call below. The example run is from [PRJNA356544](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA356544) which has 12 experiments, each with a single run, and we should return 12 runs.
 Written by: Rob Edwards (1/11/2018)
 Confirmed by:
 Databases: SRA, BioProject
 
 ```
-esearch -db sra -query "SRR532256" |  efetch -format docsum | xtract -pattern Runs -ACC @acc  -element "&ACC"
+esearch -db sra -query "SRR5088933" |  efetch -format docsum | xtract -pattern Bioproject  -element Bioproject | \
+xargs -i esearch -db bioproject -query "{}" | elink -target sra | efetch -format docsum | \
+xtract -pattern Runs -ACC @acc  -element "&ACC"
 ```
 
 ### Get all SRA runs for a given BioProject 
@@ -83,6 +85,22 @@ Databases: SRA, BioProject
 esearch -db bioproject -query "PRJNA356464" | elink -target sra | efetch -format docsum | \
 xtract -pattern DocumentSummary -ACC @acc -block DocumentSummary -element "&ACC"
 ```
+
+### Get all assemblies associated with a bioproject
+Description (optional): Metagenome-assembled-genomes (MAGs) are being deposited as assemblies in bioprojects, and often include thousands of genomes. In order to extract them for computing, you probably want to download all the genomes. For example, bioproject [PRJEB26432](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB26432/) has 1,962 assemblies. This bioproject does not include annotated sequences, and so this recipe downloads the fasta file, but you should check other assemblies.
+Written by: Rob Edwards (8/6/2020)
+Confirmed by:
+Databases: BioProject, Assembly
+
+```
+esearch -db bioproject -query "PRJEB26432" | \
+elink -target assembly | efetch -format docsum | \
+xtract -pattern DocumentSummary -element FtpPath_GenBank | \
+awk -F"/" '{print $0"/"$NF"_genomic.fna.gz"}' | xargs wget
+```
+
+
+
 
 ### Get latitiude and longitude for SRA Datasets (e.g. outbreaks and metagenomes)
 Description (optional):  
