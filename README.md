@@ -86,6 +86,22 @@ esearch -db bioproject -query "PRJNA356464" | elink -target sra | efetch -format
 xtract -pattern DocumentSummary -ACC @acc -block DocumentSummary -element "&ACC"
 ```
 
+### Get all assemblies associated with a bioproject
+Description (optional): Metagenome-assembled-genomes (MAGs) are being deposited as assemblies in bioprojects, and often include thousands of genomes. In order to extract them for computing, you probably want to download all the genomes. For example, bioproject [PRJEB26432](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB26432/) has 1,962 assemblies. This bioproject does not include annotated sequences, and so this recipe downloads the fasta file, but you should check other assemblies.
+Written by: Rob Edwards (8/6/2020)
+Confirmed by:
+Databases: BioProject, Assembly
+
+```
+esearch -db bioproject -query "PRJEB26432" | \
+elink -target assembly | efetch -format docsum | \
+xtract -pattern DocumentSummary -element FtpPath_GenBank | \
+awk -F"/" '{print $0"/"$NF"_genomic.fna.gz"}' | xargs wget
+```
+
+
+
+
 ### Get latitiude and longitude for SRA Datasets (e.g. outbreaks and metagenomes)
 Description (optional):  
 Written by: BB, Mike D, Rob Edwards (4/12/2017)  
