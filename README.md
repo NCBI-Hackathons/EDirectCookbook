@@ -7,6 +7,8 @@
 
 **To install EDirect, follow the instructions in ["Entrez Direct: E-utilities on the Unix Command Line"](https://www.ncbi.nlm.nih.gov/books/NBK179288/)**
 
+**PLEASE UPDATE TO THE LATEST VERSION of E-Direct when possible to avoid a bug in older versions associated with [the new NCBI API rate limit policy and API keys](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/)**
+
 ## How to contribute
 
 You can contribute to this page through GitHub. (If you are not already viewing the GitHub version of this page, please click the "View on GitHub" button at the top of the page.)  Using GitHub, you can create Issues or Pull Requests to contribute to the cookbook.
@@ -27,6 +29,7 @@ You can contribute to this page through GitHub. (If you are not already viewing 
 
 * Please keep to <50,000 expected hits (it simply won’t work)
 * Please do not run from multiple processors on a compute farm
+* Update to latest version
 
 For more information and documentation on EDirect, please see:
 
@@ -38,6 +41,17 @@ For more information and documentation on EDirect, please see:
 **All code is as-is and produced for the bioinformatics community, from the bioinformatics community.**
 
 ## EDirect Scripts
+
+### Get all proteins from a nucleotide interval in a genome
+
+Description (optional):  
+Written by: Peter Cooper
+Confirmed by: Ben Busby 
+Databases: Taxonomy
+
+```
+efetch -db nuccore -id NZ_AZKP01000022.1 -seq_start 149413 -seq_stop 154038 -format gbc | xtract -insd CDS INSDInterval_from INSDInterval_to protein_id product
+```
 
 ### Get child taxids for a node in NCBI taxonomy 
 Description (optional):  Note:  Options for parsing nodes.dmp from NCBI Taxonomy are cited in issue #25, intentionally left open
@@ -435,4 +449,31 @@ Databases: pubmed
 efetch -db pubmed -id 24102982 -format xml | \
 xtract -pattern PubmedArticle -tab "|" -element MedlineCitation/PMID \
 -block MeshHeading -tab "|" -sep "/" -element DescriptorName,QualifierName
+```
+
+### Search for articles by authors affiliated with a specific institution by matching two partial affiliation strings.
+
+Description (optional): Searching PubMed for two affiliation strings ANDed together (e.g. "translational medicine\[AD] AND thomas jefferson\[AD]") will retrieve all records that have both strings listed somewhere in the record's Affiliation data, but does not require both strings be listed on the same author's affiliation. To generate a list of PMIDs where both strings are present in the same affiliation element, use the following script.  
+Written by: Mike Davidson (4/2/2018)  
+Confirmed by:  Mike Davidson (NLM) (v8.10, 4/2/2018)  
+Databases: pubmed  
+
+```
+esearch -db pubmed -query "translational medicine[ad] AND thomas jefferson[ad]" | \
+efetch -format xml | \
+xtract -pattern PubmedArticle -PMID MedlineCitation/PMID \
+-block Affiliation -if Affiliation -contains "translational medicine" -and Affiliation -contains "thomas jefferson" \
+-tab "\n" -element "&PMID" | \
+sort -n | uniq
+```
+### Search for PMC articles citing a gived PubMed articler; retrieve title, source, ID
+
+Description: Retrieve information about all PMC articles (wihich have free fulltext available) which cite a gived PubMed article
+Written by: Lukas Wagner (08/16/2018)
+Databases: pubmed, pmc
+
+```
+esearch -db pubmed -query 23618408 | elink -name pubmed_pmc_refs -target pmc | \
+efetch -format docsum | \
+xtract -pattern DocumentSummary -element Title -element Source -block ArticleId -if "IdType" -equals pmcid -element Value
 ```
